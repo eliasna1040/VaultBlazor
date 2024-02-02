@@ -1,3 +1,5 @@
+using DAL;
+using Microsoft.EntityFrameworkCore;
 using Services;
 using VaultBlazor.Components;
 
@@ -7,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddScoped<IEncryptFileService, EncryptFileService>();
+builder.Services.AddScoped<IEncryptFileService, EncryptFileService>().AddScoped<IUserService, UserService>();
+builder.Services.AddDbContext<VaultContext>((x) => x.UseSqlServer(builder.Configuration.GetConnectionString("VaultDb")));
 
 var app = builder.Build();
 

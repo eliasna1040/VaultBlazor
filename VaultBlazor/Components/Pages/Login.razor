@@ -1,0 +1,68 @@
+@page "/Login"
+@using Services
+@using DAL.Models
+@rendermode InteractiveServer
+@inject IUserService UserService
+
+@if (_loggedInUser != null)
+{
+    <div class="alert alert-success" role="alert">
+        @_loggedInUser.Username is logged in
+    </div>
+}
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button @onclick="ClearFields" class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-tab-content" type="button" role="tab" aria-controls="login-tab-content" aria-selected="true">login</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button @onclick="ClearFields" class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register-tab-content" type="button" role="tab" aria-controls="register-tab-content" aria-selected="false">register</button>
+    </li>
+</ul>
+
+<div class="tab-content mt-3">
+    <div class="tab-pane active col-3" id="login-tab-content" role="tabpanel" aria-labelledby="login-tab">
+        <EditForm Model="_user" OnSubmit="SubmitLoginForm">
+            <p>Username</p>
+            <InputText class="form-control mb-2" @bind-Value="_user.Username"/>
+            <p>Password</p>
+            <InputText class="form-control mb-2" type="password" @bind-Value="_user.Password"/>
+            <button class="btn btn-primary" type="submit">Login</button>
+        </EditForm>
+    </div>
+    <div class="tab-pane col-3" id="register-tab-content" role="tabpanel" aria-labelledby="register-tab">
+        <EditForm Model="_user" OnSubmit="SubmitRegisterForm">
+            <p>Username</p>
+            <InputText class="form-control mb-2" @bind-Value="_user.Username"/>
+            <p>Password</p>
+            <InputText class="form-control mb-2" type="password" @bind-Value="_user.Password"/>
+            <button class="btn btn-primary" type="submit">Register</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    public User _user { get; set; }
+    private User? _loggedInUser;
+    protected override void OnInitialized() => _user ??= new User();
+
+    private async Task SubmitLoginForm()
+    {
+        _loggedInUser = await UserService.Login(_user);
+    }
+
+    private async Task SubmitRegisterForm()
+    {
+        _loggedInUser = await UserService.CreateUser(_user);
+    }
+
+    private void ClearFields()
+    {
+        _user.Username = string.Empty;
+        _user.Password = string.Empty;
+        _loggedInUser = null;
+    }
+
+}
+

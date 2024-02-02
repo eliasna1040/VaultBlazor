@@ -28,7 +28,7 @@ VaultBlazor is a Web App madein Blazor to encrypt and decrypt files and password
 * Selenium.WebDriver v4.17.0
 
 ## Releases
-### Release [v1.0](https://github.com/eliasna1040/VaultBlazor/tree/v1.0)
+### [v1.0](https://github.com/eliasna1040/VaultBlazor/tree/v1.0)
 
 ## Changelog
 ### [v1.0](https://github.com/eliasna1040/VaultBlazor/tree/v1.0) Features:
