@@ -1,4 +1,4 @@
-# IoTHouse
+# VaultBlazor
 
 ## Table of Contents
 [About the project](#about-the-project)
