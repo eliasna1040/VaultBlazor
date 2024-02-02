@@ -5,7 +5,7 @@
 
 [Requirements](#requirements)
 
-[Libraries](#nuget packages)
+[Nuget-packages](#nuget-packages)
 
 [Releases](#releases)
 
@@ -20,7 +20,7 @@ VaultBlazor is a Web App madein Blazor to encrypt and decrypt files and password
 * PC or Phone
 * Internet connection
 
-## Nuget packages
+## Nuget-packages
 * Microsoft.NET.Test.Sdk v17.6.0
 * xunit v2.4.2
 * xunit.runner.visualstudio v2.4.5
